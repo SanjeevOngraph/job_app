@@ -1,7 +1,7 @@
 development:
   adapter: postgresql
   encoding: unicode
-  database: job_app
+  database: job_app_latest
   pool: 5
   username: postgres
   password: admin
