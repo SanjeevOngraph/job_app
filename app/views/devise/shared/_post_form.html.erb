@@ -1,0 +1,16 @@
+<%= form_for(@post) do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
+  <div class="field">
+    <%= f.text_area :content, placeholder: "Create a new post title and description" %>
+  </div>
+
+  <div class="field">
+  	<%= f.text_area :content, placeholder: "Set the Experience" %>
+  </div>
+
+  <div class="field">
+  	<%= f.text_area :content, placeholder: "Set the salary" %>
+  </div>
+
+  <%= f.submit "Share", class: "btn btn-primary" %>
+<% end %>

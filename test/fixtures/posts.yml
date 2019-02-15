@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  post_title: MyString
+  experience: MyString
+  salary: MyString
+  user: one
+
+two:
+  post_title: MyString
+  experience: MyString
+  salary: MyString
+  user: two
