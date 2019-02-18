@@ -1,0 +1,10 @@
+<%= link_to("Back TO LIST",posts_path,:class => 'back-link')%>
+<div class = "New Post">
+	<h1>Create Post</h1>
+	<%= form_for(@post,:url => posts_path,:method => 'post') do |f| %>
+	<%= render(:partial => 'form',:locals => {:f => f}) %>
+	<div class = "form-button">
+		<%= f.submit("Create Post")%>
+	</div>
+	<%end%>
+</div>

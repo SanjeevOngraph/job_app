@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   get '/help', to: 'static_pages#help'
   get '/new',to: 'devise/sessions#new'
   get '/show', to: 'users#show'
+  get '/edit', to: 'users#edit'
   
   devise_for :users, path: 'auth', path_names: { sign_in: 'login', sign_out: 'logout', 
   	password: 'secret', confirmation: 'verification', unlock: 'unblock', 
@@ -12,8 +13,13 @@ Rails.application.routes.draw do
   }
   #get "posts#index"
   root 'static_pages#home'
-  
+
   resources :users
 
+  resources :posts do
+  	member do
+  		get :delete
+  	end
+  end
   
 end

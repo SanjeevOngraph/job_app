@@ -7,11 +7,11 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(current_user.id)
-    puts @user.inspect 
+    #puts @user.inspect 
   end
 
   def create
-  	user = User.new(user_params)
+  	@user = User.new(user_params)
   end
 
   def new
@@ -21,5 +21,16 @@ class UsersController < ApplicationController
   def index
     @users = User.all
   end
+
+  def employer
+  	@user = User.new(params[:id])
+  end
+
+private
+
+def user_params
+	params.required(:users).permit(:role.to_sym,:email)
+end
+
 
 end

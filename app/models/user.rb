@@ -1,10 +1,10 @@
 require 'rolify'
+
 class User < ApplicationRecord
   rolify :before_add => :before_add_method
 
-   # has_secure_password
-   has_many :post # add this
-
+   enum role: [:employer,:jobseeker]
+   has_many :post, :foreign_key => 'User_id' 
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
@@ -12,8 +12,9 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable,
          :confirmable
 
+
   def before_add_method(role)
-    # do something before it gets added
+    self.add_role(role)
   end
 
   after_create :assign_role
@@ -23,7 +24,7 @@ class User < ApplicationRecord
   end
 
   def assign_role
-  	self.add_role(:jobseeker)
+  	self.add_role(params[:role])
   end
 
 end

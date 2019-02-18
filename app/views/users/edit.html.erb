@@ -1,0 +1,16 @@
+<% if !flash[:notice].blank?%>
+<div class = "notice">
+	<%= flash[:notice]%>
+</div>
+<%end%>
+
+<%= link_to("Back TO LIST",posts_path,:class => 'back-link')%>
+<div class = "post new">
+	<h1>Update Post</h1>
+	<%= form_for(@post,:url => post_path(@post),:method => 'patch') do |f| %>
+	<%= render(:partial => 'form',:locals => {:f => f}) %>
+	<div class = "form-button">
+		<%= f.submit("Update Post")%>
+	</div>
+	<%end%>
+</div>
