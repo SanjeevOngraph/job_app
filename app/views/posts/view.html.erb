@@ -1,0 +1,20 @@
+<div class = "Job show">
+	<h1> Post</h1>
+	<table class="listing" summary= "Job list">
+		<tr class="header"><br/><br/><br/>
+
+			<th> | Job Tittle | </th>
+			<th> | Experience | </th>
+			<th> | Salary | </th>
+			<th> | User id | </th>
+		</tr>
+		<% @post.each do |post|%>
+		<tr>
+			<td><%= post.post_title %></td> 
+			<td><%= post.experience %></td> 
+			<td><%= post.salary%></td>
+			<td><%= post.user_id%></td>
+		</tr>
+		<%end%>
+	</table>
+</div>

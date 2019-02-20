@@ -6,8 +6,11 @@ class UsersController < ApplicationController
   end
 
   def show
+    puts "==========="
+    puts user_signed_in?
+    puts "==========="
     @user = User.find(current_user.id)
-    #puts @user.inspect 
+    role = current_user.role.first
   end
 
   def create
@@ -15,7 +18,7 @@ class UsersController < ApplicationController
   end
 
   def new
-  	@user = User.new
+  	@user = User.new(current_user.id)
   end
 
   def index
@@ -29,7 +32,7 @@ class UsersController < ApplicationController
 private
 
 def user_params
-	params.required(:users).permit(:role.to_sym,:email)
+	params.required(:users).permit(:role,:email)
 end
 
 

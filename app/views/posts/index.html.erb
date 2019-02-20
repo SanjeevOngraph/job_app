@@ -1,0 +1,35 @@
+<div class="Job index">
+	<h1>Job</h1>
+	<% if is_employer?%>
+		<%= link_to 'Create new  Job', new_post_path %>
+	<% end %>	
+
+	<table class="listing" summary= "Job list">
+		<tr class="header"><br/><br/><br/>
+
+			<th> | Job Tittle | </th>
+			<th> | Experience | </th>
+			<th> | Salary | </th>
+			
+		</tr>
+		<% @posts.each do |post|%>
+		<tr>
+			<td><%= post.post_title %></td> 
+			<td><%= post.experience %></td> 
+			<td><%= post.salary%></td>
+
+			<% if is_employer? %>
+				<td class="action">
+					<%= link_to("Show",post_path(post.id),:class => 'action show')%> |
+					<%= link_to("Edit", edit_post_path(post.id),:class => 'action edit')%> |
+					<%= link_to("Delete", delete_post_path(post.id) ,:class => 'action delete')%>
+				</td>
+				<% else %>
+				<td class = "action">
+					<%= link_to '<button type="button">Apply</button>'.html_safe, new_post_path %>
+				</td>	
+			<% end %>
+		</tr>
+		<%end%>
+	</table>
+</div>

@@ -1,0 +1,23 @@
+<%= link_to("Back TO LIST",posts_path,:class => 'back-link')%>
+<div class = "New Post">
+	<h1>Create Post</h1>
+	<%= form_for(@post) do |f| %>
+		<table summary="fields for post">
+			<tr>
+				<th>Post Title</th>
+				<td><%= f.text_field(:post_title)%></td>
+			</tr>
+			<tr>
+				<th>Experience</th>
+				<td><%= f.text_field(:experience) %></td>
+			</tr>
+			<tr>
+				<th>Salery</th>
+				<td><%= f.text_field(:salary) %></td>
+			</tr>		
+		</table>
+	<div class = "form-button">
+		<%= f.submit("Create Post")%>
+	</div>
+	<%end%>
+</div>
