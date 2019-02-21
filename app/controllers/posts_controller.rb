@@ -59,6 +59,22 @@ class PostsController < ApplicationController
     redirect_to(posts_path)
   end
 
+   def job_email
+    @posts = Post.find(params[:id])
+    UserMailer.apply_job_email(@posts).deliver_now
+    Applied.create(user_id: current_user.id, post_id: params[:id])
+    redirect_to posts_path
+    flash[:sucess] = "Aplied job Sucessfully."
+   end
+
+   def cancel_email
+   	@posts = Post.find(params[:id])
+   	UserMailer.cancel_email(@posts).deliver_now
+   	Applied.where(user_id: current_user.id, post_id: params[:id]).delete_all
+   	redirect_to posts_path
+    flash[:sucess] = "Sucessfully Job Canceled."
+   end
+
   private 
 
   def post_params

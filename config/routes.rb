@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   get '/new',to: 'devise/sessions#new'
   get '/show', to: 'users#show'
   get '/edit', to: 'users#edit'
-  #get '/post', to: 'posts#post'
+
   
   devise_for :users, path: 'auth', path_names: { sign_in: 'login', sign_out: 'logout', 
   	password: 'secret', confirmation: 'verification', unlock: 'unblock', 
@@ -21,6 +21,8 @@ Rails.application.routes.draw do
   	member do
   		get :delete
   		get :view
+      get :job_email
+      get :cancel_email
   	end
   end
   

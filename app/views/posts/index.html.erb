@@ -26,7 +26,14 @@
 				</td>
 				<% else %>
 				<td class = "action">
-					<%= link_to '<button type="button">Apply</button>'.html_safe, new_post_path %>
+					<% if Applied.where(user_id: current_user.id, post_id: post.id).exists? %>
+						<%= link_to '<button type="button">Cancel</button>'.html_safe, cancel_email_post_path(post.id)%>
+					<%else%>
+						<%= link_to '<button type="button">Apply</button>'.html_safe, job_email_post_path(post.id)%>
+					<% if Applied.where(user_id: current_user.id, post_id: post.id).exists? %>
+						<%= link_to '<button type="button">Apply</button>'.html_safe, job_email_post_path(post.id)%>
+					<%end%>	
+					<%end%>
 				</td>	
 			<% end %>
 		</tr>

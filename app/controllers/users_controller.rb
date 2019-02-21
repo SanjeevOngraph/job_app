@@ -35,5 +35,4 @@ def user_params
 	params.required(:users).permit(:role,:email)
 end
 
-
 end

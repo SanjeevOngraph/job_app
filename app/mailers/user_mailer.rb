@@ -1,10 +1,14 @@
 class UserMailer < ApplicationMailer
 	default from: 'notifications@example.com'
  
-  def welcome_email
-    @user = params[:user]
-    @url  = 'http://example.com/login'
-    mail(to: @user.email, subject: 'Sucessfully applied for the job')
-    
+  def apply_job_email(post)
+    @created_by = post.user
+    mail(to: @created_by.try(:email), subject: 'Applied for the job')  
   end
+
+  def cancel_email(post)
+  	@created_by = post.user
+    mail(to: @created_by.try(:email), subject: 'Applied for the job')
+  end
+
 end
