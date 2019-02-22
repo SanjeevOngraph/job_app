@@ -1,0 +1,24 @@
+<div class = "Applied Job">
+	<h1>Applied Jobs are</h1>
+	<table class="table">
+		<%@posts.each_with_index do |post, index|%>
+		  <tr>
+		  	<th><%= post.post_title%></th>
+		    <th>Applied By</th>
+		    <th>Applied At</th>
+		  </tr>
+		  <%post.applieds.each_with_index do |applied, index|%>
+			  <tr>
+			  	<td></td>
+			    <td><%= applied.applied_by.try(:email)%></td>
+			    <td><%= "#{time_in_words applied.created_at} ago" %></td>
+			  </tr>
+			<% end%>
+		  <tr>
+		  	<th></th>
+		    <th></th>
+		    <th></th>
+		  </tr>
+		<% end%>
+	</table>
+</div>

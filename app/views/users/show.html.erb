@@ -4,6 +4,7 @@
 
    <% if current_user.role == "employer"%>
   	<%= link_to 'Create Post', posts_path, :class => 'navbar-link' %> |
+    <%= link_to 'Job applied on your post', job_path, :class => 'navbar-link' %> |
    <% else %>
   	 <%= link_to 'View All Jobs', posts_path, :class => 'navbar-link' %> |
    <% end %>

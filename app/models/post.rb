@@ -4,6 +4,7 @@ class Post < ApplicationRecord
   default_scope -> { order(created_at: :desc) }
   # validates :user, presence: true
 
-  belongs_to :user   
+  belongs_to :user
+  has_many :applieds   
 
 end

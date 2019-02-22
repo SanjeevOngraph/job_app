@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   get '/new',to: 'devise/sessions#new'
   get '/show', to: 'users#show'
   get '/edit', to: 'users#edit'
+  get '/job', to: 'posts#job'
 
   
   devise_for :users, path: 'auth', path_names: { sign_in: 'login', sign_out: 'logout', 
@@ -15,7 +16,7 @@ Rails.application.routes.draw do
   #get "posts#index"
   root 'static_pages#home'
 
-  resources :users
+  resources :users 
 
   resources :posts do
   	member do

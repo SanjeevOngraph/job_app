@@ -22,6 +22,10 @@ class PostsController < ApplicationController
 		@post = Post.find_by(id: params[:id])
 	end
 
+	def job
+    @posts = current_user.posts
+	end
+
 	def view
 		@post = Post.find_by(id: params[:id])
 	end
@@ -59,21 +63,23 @@ class PostsController < ApplicationController
     redirect_to(posts_path)
   end
 
-   def job_email
-    @posts = Post.find(params[:id])
-    UserMailer.apply_job_email(@posts).deliver_now
-    Applied.create(user_id: current_user.id, post_id: params[:id])
-    redirect_to posts_path
-    flash[:sucess] = "Aplied job Sucessfully."
-   end
+	def job_email
+		@posts = Post.find(params[:id])
+		UserMailer.apply_job_email(@posts).deliver_now
+		@eid = Post.find_by(id: params[:id]).user_id
+		Applied.create(user_id: current_user.id, post_id: params[:id], emp_id: @eid)
+		redirect_to posts_path
+		flash[:sucess] = "Aplied job Sucessfully."
+	end
 
-   def cancel_email
-   	@posts = Post.find(params[:id])
-   	UserMailer.cancel_email(@posts).deliver_now
-   	Applied.where(user_id: current_user.id, post_id: params[:id]).delete_all
-   	redirect_to posts_path
-    flash[:sucess] = "Sucessfully Job Canceled."
-   end
+	def cancel_email
+		@posts = Post.find(params[:id])
+		UserMailer.cancel_email(@posts).deliver_now
+		@eid = Post.find_by(id: params[:id]).user_id
+		Applied.where(user_id: current_user.id, post_id: params[:id],emp_id: @eid).delete_all
+		flash[:sucess] = "Sucessfully Job Canceled."
+		redirect_to posts_path
+	end
 
   private 
 
