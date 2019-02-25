@@ -1,14 +1,20 @@
 <header class="navbar navbar-fixed-top navbar-inverse">
   <div class="container">
-    <%= link_to "sample app", root_path, id: "logo" %>
+    <%= link_to "JOB", root_path, id: "logo" %>
     <nav>
       <ul class="nav navbar-nav navbar-right">
-        <li><%= link_to "Home",    '#' %></li>
+        <li><%= link_to "Home", '#' %></li>
         <li><%= link_to "Help",    '#' %></li>
         <% if user_signed_in? %>
+            <% if current_user.role == "employer"%>
+                <li><%= link_to 'Create Post', posts_path, :class => 'navbar-link' %></li>
+                <li><%= link_to 'Job applied on your post', job_path, :class => 'navbar-link' %></li>
+            <% else %>
+                <li><%= link_to 'View All Jobs', posts_path, :class => 'navbar-link' %></li>
+            <% end %>
           <li><%= link_to "Logout", destroy_user_session_path, method: :delete%></li>
         <% else %>
-          <li><%= link_to "Log in", new_user_registration_path %></li>
+          <li><%= link_to "Log in",  new_user_session_path %></li>
         <% end %>
       </ul>
     </nav>

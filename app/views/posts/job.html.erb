@@ -1,5 +1,6 @@
 <div class = "Applied Job">
 	<h1>Applied Jobs are</h1>
+	<%= will_paginate @posts %>
 	<table class="table">
 		<%@posts.each_with_index do |post, index|%>
 		  <tr>
@@ -13,7 +14,7 @@
 			    <td><%= applied.applied_by.try(:email)%></td>
 			    <td><%= "#{time_in_words applied.created_at} ago" %></td>
 			  </tr>
-			<% end%>
+		<% end%>
 		  <tr>
 		  	<th></th>
 		    <th></th>
@@ -21,4 +22,5 @@
 		  </tr>
 		<% end%>
 	</table>
+	<%= will_paginate @posts %>
 </div>

@@ -20,10 +20,7 @@ Rails.application.routes.draw do
 
   resources :posts do
   	member do
-  		get :delete
-  		get :view
-      get :job_email
-      get :cancel_email
+  		get :delete, :view, :job_email,:cancel_email
   	end
   end
   

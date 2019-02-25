@@ -4,9 +4,9 @@ class PostsController < ApplicationController
 
 	def index
 		if is_employer?
-			@posts = Post.where(user_id: current_user.id)
+			@posts = Post.where(user_id: current_user.id).paginate(page: params[:page], per_page: 5)
 		else
-			@posts = Post.all
+			@posts = Post.paginate(:page => params[:page], :per_page => 5)
 		end
 	end
 
@@ -23,7 +23,7 @@ class PostsController < ApplicationController
 	end
 
 	def job
-    @posts = current_user.posts
+    @posts = current_user.posts.paginate(:page => params[:page], :per_page => 5)
 	end
 
 	def view
@@ -33,7 +33,6 @@ class PostsController < ApplicationController
 	def create
 		@post = Post.new(post_params)
 		@post.user_id = current_user.id
-
 		if @post.save!
 			flash[:notice] = "Sucessfully Created Post"
 			redirect_to(posts_path)
@@ -65,7 +64,7 @@ class PostsController < ApplicationController
 
 	def job_email
 		@posts = Post.find(params[:id])
-		UserMailer.apply_job_email(@posts).deliver_now
+		UserMailer.job_email(@posts, current_user).deliver_now
 		@eid = Post.find_by(id: params[:id]).user_id
 		Applied.create(user_id: current_user.id, post_id: params[:id], emp_id: @eid)
 		redirect_to posts_path
@@ -74,7 +73,7 @@ class PostsController < ApplicationController
 
 	def cancel_email
 		@posts = Post.find(params[:id])
-		UserMailer.cancel_email(@posts).deliver_now
+		UserMailer.cancel_email(@posts, current_user).deliver_now
 		@eid = Post.find_by(id: params[:id]).user_id
 		Applied.where(user_id: current_user.id, post_id: params[:id],emp_id: @eid).delete_all
 		flash[:sucess] = "Sucessfully Job Canceled."

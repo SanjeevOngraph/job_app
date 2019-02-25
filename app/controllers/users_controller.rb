@@ -29,10 +29,6 @@ class UsersController < ApplicationController
   	@user = User.new(params[:id])
   end
 
-  def job
-    @users = Applied.where(user_id: current_user.id)
-  end
-
 private
 
 def user_params
