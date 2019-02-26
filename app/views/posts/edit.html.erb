@@ -4,7 +4,6 @@
 </div>
 <%end%>
 
-<%#= link_to("Back TO LIST",posts_path,:class => 'back-link')%>
 <div class = "post new">
 	<h1>Update Post</h1>
 	<%= form_for(@post) do |f| %>	
@@ -23,8 +22,8 @@
 		</tr>		
 	</table>
 	<div class = "form-button">
-		<%= f.submit("Update Post")%>
+		<%= f.submit "Update Post", :class => "btn btn-success"%>
 	</div>
 	<%end%>
 </div>	
-<%#=,:url => post_path(@post),:method => 'patch'%>
+

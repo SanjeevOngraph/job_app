@@ -5,5 +5,6 @@ class Post < ApplicationRecord
   # validates :user, presence: true
 
   belongs_to :user
-  has_many :applieds   
+  has_many :applieds 
+  validates :post_title, :experience, :salary, Presence: true
 end

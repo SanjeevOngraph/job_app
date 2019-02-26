@@ -1,41 +1,41 @@
 <div class="Job index">
-	<h1>Job</h1>
-	<% if is_employer?%>
-		<%= link_to 'Create new  Job', new_post_path %>
-	<% end %>	
+  <h1>Job</h1>
+  <% if is_employer?%>
+  <div class= "center">
+    <%= link_to "Create new  Job", new_post_path, :class => 'btn btn-info btn-sm'%>
+   </div> 
+  <% end %> 
     <%= will_paginate @posts %>
-	<table class="table" summary= "Job list">
-		<tr class="header">
-			<th>Job Tittle</th>
-			<th>Experience </th>
-			<th>Salary</th>			
-		</tr>
-		<% @posts.each do |post|%>
-		<tr>
-			<td><%= post.post_title %></td> 
-			<td><%= post.experience %></td> 
-			<td><%= post.salary%></td>
+  <table class="table table-striped table-hover" summary= "Job list">
+    <tr class="header">
+      <th>Job Tittle</th>
+      <th>Experience </th>
+      <th>Salary</th>
+      <th></th>    
+    </tr>
+    <% @posts.each do |post|%>
+      <tr>
+        <td><%= post.post_title %></td> 
+        <td><%= post.experience %></td> 
+        <td><%= post.salary%></td>
 
-			<% if is_employer? %>
-				<td class="action">
-					<%= link_to('<button type="button">Show</button>'.html_safe,post_path(post.id),:class => 'action show')%>
-					<%= link_to('<button type="button">Edit</button>'.html_safe, edit_post_path(post.id),:class => 'action edit')%>
-					<%= link_to('<button type="button">Delete</button>'.html_safe, delete_post_path(post.id) ,:class => 'action delete')%>
-				</td>
-				<% else %>
-				<td class = "action">
-					<% if Applied.where(user_id: current_user.id, post_id: post.id).exists? %>
-						<%= link_to '<button type="button">Cancel</button>'.html_safe, cancel_email_post_path(post.id)%>
-					<%else%>
-						<%= link_to '<button type="button">Apply</button>'.html_safe, job_email_post_path(post.id)%>
-					<% if Applied.where(user_id: current_user.id, post_id: post.id).exists? %>
-						<%= link_to '<button type="button">Apply</button>'.html_safe, job_email_post_path(post.id)%>
-					<%end%>	
-					<%end%>
-				</td>	
-			<% end %>
-		</tr>
-		<%end%>
-	</table>
-	<%= will_paginate @posts %>
+        <% if is_employer? %>
+          <td class="action">
+            <%= link_to "Show",post_path(post.id),:class => "btn btn-info"%>
+            <%= link_to "Edit", edit_post_path(post.id),:class => 'btn btn btn-primary'%>
+            <%= link_to "Delete", delete_post_path(post.id) ,:class => 'btn btn-danger'%>
+          </td>
+        <% else %>
+          <td class = "action">
+            <% if is_applied(post) %>
+              <%= link_to "Cancel", cancel_email_post_path(post.id), :class => 'btn btn-danger'%>
+            <%else%>
+              <%= link_to "Apply", job_email_post_path(post.id), :class => 'btn btn-success'%>
+            <%end%>
+          </td> 
+        <% end %>
+      </tr>
+    <%end%>
+  </table>
+  <%= will_paginate @posts %>
 </div>

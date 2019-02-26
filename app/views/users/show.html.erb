@@ -2,6 +2,6 @@
   <h4>Welcome, <h4><strong><%= current_user.email %></strong></h4></h4>
   <%= render "layouts/footer" %>
 <% else %>
-  <%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link'  %> |
-  <%= link_to "Login", new_user_session_path, :class => 'navbar-link'  %>
+  <%= link_to "Sign up", new_user_registration_path, :class => "btn btn btn-primary"  %> |
+  <%= link_to "Login", new_user_session_path, :class => "btn btn btn-primary"  %>
 <% end %>  

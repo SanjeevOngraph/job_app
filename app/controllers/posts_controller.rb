@@ -32,20 +32,21 @@ class PostsController < ApplicationController
 
 	def create
 		@post = Post.new(post_params)
-		@post.user_id = current_user.id
-		if @post.save!
-			flash[:notice] = "Sucessfully Created Post"
+		@post.user_id = current_user.id	   	
+		if @post.save
+			flash[:success] = "Sucessfully Created Post"
 			redirect_to(posts_path)
 		else
+			flash[:danger] = @post.errors.full_messages.inspect
 			render('new')
 		end
 	end
 
 	def update
-	@post = Post.find_by(id: params[:id])
+		@post = Post.find_by(id: params[:id])
     if @post.update_attributes(post_params)	
-      flash[:notice] = "Post Updated Sucessfully........"
       redirect_to(posts_path(@post))
+      flash[:info] = "Post Updated Sucessfully..."
     else
       render('edit')
     end
@@ -58,7 +59,7 @@ class PostsController < ApplicationController
   def destroy
     @post = Post.find(params[:id])
     @post.destroy
-    flash[:notice] = "Post '#{@post.post_title}'Created Sucessfully........"
+    flash[:success] = "Post ' #{@post.post_title} ' Sucessfully Deleted..."
     redirect_to(posts_path)
   end
 
@@ -68,7 +69,7 @@ class PostsController < ApplicationController
 		@eid = Post.find_by(id: params[:id]).user_id
 		Applied.create(user_id: current_user.id, post_id: params[:id], emp_id: @eid)
 		redirect_to posts_path
-		flash[:sucess] = "Aplied job Sucessfully."
+		flash[:success] = "Aplied job Sucessfully."
 	end
 
 	def cancel_email
@@ -76,7 +77,7 @@ class PostsController < ApplicationController
 		UserMailer.cancel_email(@posts, current_user).deliver_now
 		@eid = Post.find_by(id: params[:id]).user_id
 		Applied.where(user_id: current_user.id, post_id: params[:id],emp_id: @eid).delete_all
-		flash[:sucess] = "Sucessfully Job Canceled."
+		flash[:success] = "Sucessfully Job Canceled."
 		redirect_to posts_path
 	end
 
