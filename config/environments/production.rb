@@ -52,7 +52,7 @@ Rails.application.configure do
                         authentication: :plain,
                         domain: 'gmail.com',
                         user_name: 'sanjeev.ongraph@gmail.com',
-                        password: 'ongraph@sanjeev'
+                        password: 'ongraph@1sanjeev'
   }
 
   # Mount Action Cable outside main process or domain
