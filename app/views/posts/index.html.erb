@@ -11,7 +11,11 @@
       <th>Job Tittle</th>
       <th>Experience </th>
       <th>Salary</th>
-      <th></th>    
+      <% if is_employer? %>
+       <th>Show / Edit / Delete</th>
+      <%else%>
+       <th>Apply / Cancel</th>
+      <%end%>    
     </tr>
     <% @posts.each do |post|%>
       <tr>

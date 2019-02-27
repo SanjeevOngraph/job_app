@@ -6,9 +6,6 @@ class UsersController < ApplicationController
   end
 
   def show
-    puts "==========="
-    puts user_signed_in?
-    puts "==========="
     @user = User.find(current_user.id)
     role = current_user.role.first
   end

@@ -5,7 +5,6 @@ class CreatePosts < ActiveRecord::Migration[5.2]
       t.string :experience
       t.string :salary
       t.references :user, foreign_key: true, null: false, index: true
-
       t.timestamps
     end
   end
