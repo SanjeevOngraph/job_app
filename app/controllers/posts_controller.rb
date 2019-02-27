@@ -11,8 +11,7 @@ class PostsController < ApplicationController
   end
 
   def edit
-    #@post = Post.find_by(id: params[:id])
-    @post = Post.where(id: params[:id],is_deleted: false)
+    @post = Post.find_by(id: params[:id])
   end
 
   def new
@@ -20,8 +19,7 @@ class PostsController < ApplicationController
   end
 
   def show
-    #@post = Post.find_by(id: params[:id])
-    @post = Post.where(id: params[:id],is_deleted: false)
+    @post = Post.find_by(id: params[:id])
   end
 
   def job
