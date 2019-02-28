@@ -66,7 +66,10 @@ class PostsController < ApplicationController
 
   def job_email
     @posts = Post.find(params[:id])
-    UserMailer.job_email(@posts, current_user).deliver_now
+    emails= [@posts.user.email,current_user.email]
+    emails.each do |email|
+      UserMailer.job_email(email, current_user).deliver_now
+    end
     Applied.create(user_id: current_user.id, post_id: params[:id], emp_id: @posts.user_id)
     redirect_to posts_path
     flash[:success] = "Aplied job Sucessfully."
@@ -74,7 +77,10 @@ class PostsController < ApplicationController
 
   def cancel_email
     @posts = Post.find(params[:id])
-    UserMailer.cancel_email(@posts, current_user).deliver_now
+    emails= [@posts.user.email,current_user.email]
+    emails.each do |email|
+      UserMailer.cancel_email(email, current_user).deliver_now
+    end
     @eid = Post.find_by(id: params[:id]).user_id
     Applied.where(user_id: current_user.id, post_id: params[:id],emp_id: @eid).delete_all
     flash[:success] = "Sucessfully Job Canceled."
